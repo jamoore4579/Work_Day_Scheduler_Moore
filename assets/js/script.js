@@ -1,14 +1,24 @@
 // Todays date
 $("#currentDay").text(moment().format("dddd, MMMM Do"));
 
+$(document).ready(function() {
+    // saveBtn click listener
+    $(".saveBtn").on("click", function() {
+        // get text from the description field
+        var text = $(this).siblings(".description").val();
+        var time = $(this).parent().attr("id");
 
-//TODO: Verify class are being added correctly
+        // save text in local storage
+        localStorage.setItem(time, text);
+    })
+})
+
 
 // determine if past, present or future
 var checkTime = function() {
 
     // set current time
-    var time = moment().subtract(14, 'H').format('H')
+    var time = moment().format('H')
     console.log(time)
 
     // identify elements with class "textarea"
