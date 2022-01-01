@@ -56,12 +56,6 @@ $(document).ready(function() {
 })
 
 
-//setInterval(checkTime(), (1000 * 60) * 5);
-
-
-
-
-
   
 
     
