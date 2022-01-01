@@ -11,47 +11,50 @@ $(document).ready(function() {
         // save text in local storage
         localStorage.setItem(time, text);
     })
+
+    function scheduler() {
+        // determine current time
+        var currentTime = moment().hour();
+
+        // loop through time options
+        $(".time-block").each(function() {
+            var timeSeg = parseInt($(this).attr("id").split("hour")[1]);
+            
+            // apply correct class per time reference
+            if (timeSeg < currentTime) {
+                $(this).removeClass("future");
+                $(this).removeClass("present");
+                $(this).addClass("past");
+            }
+            else if (timeSeg === currentTime) {
+                $(this).removeClass("past");
+                $(this).removeClass("future");
+                $(this).addClass("present")
+            }
+            else {
+                $(this).removeClass("past")
+                $(this).removeClass("Present")
+                $(this).addClass("future")
+            }
+        })
+    }
+
+    // retrieve data from local storage
+    $("#9 .description").val(localStorage.getItem("9"));
+    $("#10 .description").val(localStorage.getItem("10"));
+    $("#11 .description").val(localStorage.getItem("11"));
+    $("#12 .description").val(localStorage.getItem("12"));
+    $("#13 .description").val(localStorage.getItem("13"));
+    $("#14 .description").val(localStorage.getItem("14"));
+    $("#15 .description").val(localStorage.getItem("15"));
+    $("#16 .description").val(localStorage.getItem("16"));
+    $("#17 .description").val(localStorage.getItem("17"));
+
+    scheduler();
 })
 
 
-// determine if past, present or future
-var checkTime = function() {
-
-    // set current time
-    var time = moment().format('H')
-    console.log(time)
-
-    // identify elements with class "textarea"
-    var taskDesc = $("textarea");
-
-
-    // loop through past, present, future
-    for (var i = 0; i < taskDesc.length; i++) {
-
-        // set the element ID as a string
-        var elementID = taskDesc[i].id;
-        console.log(elementID)
-
-        //get element by ID
-        var newID = document.getElementById(taskDesc[i].id)
-        console.log(newID)
-
-        // remove any old classes from element
-        $(taskDesc[i].id).removeClass(".present .past .future");
-
-        // apply new class if time is past/future time
-        if (elementID < time) {
-            $(newID).addClass(".past");
-        } else if (elementID > time) {
-            $(newID).addClass(".future");
-        } else {
-            $(newID).addClass(".present");
-        }
-    }
-    
-}
-
-setInterval(checkTime(), (1000 * 60) * 5);
+//setInterval(checkTime(), (1000 * 60) * 5);
 
 
 
